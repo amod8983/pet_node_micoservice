@@ -1,0 +1,14 @@
+{
+  "name": "pet_node_micoservice",
+  "version": "1.0.0",
+  "description": "A demo microservice project using node",
+  "private": true,
+  "workspaces": ["services/*", "gateway"],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Amod kumat",
+  "license": "MIT",
+  "packageManager": "pnpm@10.13.1"
+}

@@ -1,0 +1,50 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Environment files
+.env
+.env.*.local
+
+# Dependency directories
+node_modules/
+.pnpm/
+
+# Build output
+dist/
+build/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# IDE configs
+.vscode/
+.idea/
+*.sw?
+
+# Coverage
+coverage/
+
+# Optional Yarn (in case someone uses it)
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+# Monorepo specific
+**/node_modules/
+**/dist/
