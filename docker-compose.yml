@@ -1,22 +1,35 @@
-version: '1.0'
+version: '2.0'
 services:
-  auth-service:
-    build: services/auth-service
+  gateway:
+    build: ./gateway
     ports:
-      - "3000:3000"
+      - "3000:3000"    #only expose port for gateway
     environment:
       - PORT=3000
+    depends_on:
+      - auth-service
+      - user-service
+    networks:
+      - internal
+
+  auth-service:
+    build: ./services/auth-service
+    ports:
+      - "3001"        #expose only to internal container
+    environment:
+      - PORT=3001
+    networks:
+      - internal
 
   user-service:
-    build: services/user-service
+    build: ./services/user-service
     ports:
-      - "3001:3000"
+      - "3002"        #expose only to internal container
     environment:
-      - PORT=3000
+      - PORT=3002
+    networks:
+      - internal
 
-  gateway:
-    build: gateway
-    ports:
-      - "8081:3000"
-    environment:
-      - PORT=3000
+networks:
+  internal:
+    driver: bridge
