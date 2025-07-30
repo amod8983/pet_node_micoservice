@@ -15,6 +15,7 @@ pet_node_micoservice/
 
 - Node.js (v16 or higher recommended)
 - PNPM (v10.13.1)
+- RabbitMQ
 
 ## Setup
 

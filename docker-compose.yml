@@ -1,9 +1,10 @@
-version: '2.0'
+version: "4.0"
+
 services:
   gateway:
     build: ./gateway
     ports:
-      - "3000:3000"    #only expose port for gateway
+      - "3000:3000"
     environment:
       - PORT=3000
     depends_on:
@@ -14,21 +15,36 @@ services:
 
   auth-service:
     build: ./services/auth-service
-    ports:
-      - "3001"        #expose only to internal container
     environment:
       - PORT=3001
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
     networks:
       - internal
 
   user-service:
     build: ./services/user-service
-    ports:
-      - "3002"        #expose only to internal container
     environment:
       - PORT=3002
     networks:
       - internal
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
   internal:
